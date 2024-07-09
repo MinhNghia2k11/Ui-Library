@@ -58,7 +58,7 @@ local Toggle = Tab:MakeToggle({
 ```
 
 # Make Settings For Toggle
-```
+```lua
 Toggle:MakeSetting({
     Name = "Settings Toggle",
     Default = false,
