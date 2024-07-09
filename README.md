@@ -16,6 +16,8 @@ SitinkLib:CreateNotify({
     Time = 5
 })
 ```
+
+# Make Tab
 ```lua
 local Tab = Windows:MakeTab({Name = "Tab", Logo = "rbxassetid://18394523673"})
 ```
