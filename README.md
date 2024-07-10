@@ -5,12 +5,12 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/MinhN
 
 # Make Windows
 ```lua
-local Windows = SitinkLib:MakeWindow({Title = "Sitink Lib", Creator = "Your Name", LogoHub = "rbxassetid://18374900760"})
+local Windows = Library:MakeWindow({Title = "Sitink Lib", Creator = "Your Name", LogoHub = "rbxassetid://18374900760"})
 ```
 
 # Make Notification
 ```lua
-SitinkLib:CreateNotify({
+Library:CreateNotify({
     Title = "Notification",
     Content = "Sitink Hub moi duoc co 3% ma ncc",
     Time = 5
