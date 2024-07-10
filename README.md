@@ -22,6 +22,11 @@ Library:CreateNotify({
 local Tab = Windows:MakeTab({Name = "Tab", Logo = "rbxassetid://18394523673"})
 ```
 
+# Make Section
+```lua
+Tab:MakeSection({Title = "Section"})
+```
+
 # Make Label
 ```lua
 Tab:MakeLabel({Title = "Label"})
