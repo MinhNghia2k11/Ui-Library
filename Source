@@ -2304,13 +2304,12 @@ function sitinklib:MakeWindow(GuiConfig)
                             ):Play()
                         end
                     end
-                    local DropdownValueTable = table.concat(DropdownFunc.Value, ", ")
-                    if DropdownValueTable == "" then
+                    if DropdownConfig.Default == "" then
                         DropdownBox.Text = ""
                     else
-                        DropdownBox.Text = tostring(DropdownValueTable)
+                        DropdownBox.Text = tostring(DropdownConfig.Default)
                     end
-                    DropdownConfig.Callback(DropdownFunc.Value)
+                    DropdownConfig.Callback(DropdownConfig.Default)
                 end
                 function DropdownFunc:Add(OptionName)
                     local OptionName = OptionName or "Option"
