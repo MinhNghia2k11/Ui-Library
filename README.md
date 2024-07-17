@@ -5,36 +5,49 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/MinhN
 
 # Make Windows
 ```lua
-local Windows = Library:MakeWindow({Title = "Sitink Lib", Creator = "Your Name", LogoHub = "rbxassetid://18374900760"})
+local Windows = Library:MakeWindow({
+	Name = "Sitink Hub", 
+	Description = "By ! Nightx", 
+	LogoInfo = "rbxassetid://18448428761",
+	NameInfo = "Owner Info",
+    NamePlayers = "! Nightx",
+    InfoColor = Color3.fromRGB(255, 38, 42),
+    LogoPlayers = "rbxassetid://18448428761",
+	InfoDesc = "Name : Lương Minh Nghĩa | Birthday : 12/08/2011 | discord.gg/JURvkuHr28"
+})
 ```
 
 # Make Notification
 ```lua
-Library:CreateNotify({
-    Title = "Notification",
-    Content = "Sitink Hub moi duoc co 3% ma ncc",
-    Time = 5
+Library:MakeNotify({
+    Title = "Sitink Hub",
+    Content = "Notification",
+    Description = "Nah i'd Win",
+    Time = 5 
 })
 ```
 
 # Make Tab
 ```lua
-local Tab = Windows:MakeTab({Name = "Tab", Logo = "rbxassetid://18394523673"})
+local Tab = Windows:MakeTab({Name = "Tab"})
+```
+
+# Make Section Tab
+```lua
+local SectionTab = Tab1:MakeSection({
+    Title = "Tab",
+    Content = "Nigga"
+})
 ```
 
 # Make Section
 ```lua
-Tab:MakeSection({Title = "Section"})
-```
-
-# Make Label
-```lua
-Tab:MakeLabel({Title = "Label"})
+SectionTab:Section("Cocaiconcac")
 ```
 
 # Make Paragraph
 ```lua
-Tab:MakeParagraph({
+SectionTab:MakeParagraph({
     Title = "Paragraph",
     Description = "This Is Paragraph"
 })
@@ -42,7 +55,7 @@ Tab:MakeParagraph({
 
 # Make Button
 ```
-Tab:MakeButton({
+SectionTab:MakeButton({
     Name = "Button",
     Description = "Is This Button",
     Callback = function()
@@ -53,35 +66,10 @@ Tab:MakeButton({
 
 # Make Toggle
 ```lua
-local Toggle = Tab:MakeToggle({
+local Toggle = SectionTab:MakeToggle({
     Name = "Toggle",
     Description = "Is This Toggle",
     Default = false,
-    Setting = false,
-    Callback = function(Value)
-        print(Value)
-    end
-})
-```
-
-# Make Settings For Toggle
-```lua
-Toggle:MakeSetting({
-    Name = "Settings Toggle",
-    Default = false,
-    Callback = function(Value)
-        print(Value)
-    end
-})
-```
-
-# Make Dropdown
-```lua
-local Dropdown = Tab:MakeDropdown({
-    Name = "Dropdown",
-    Description = "I'm a Dropdown",
-    List = {"1", "2"},
-    Default = "1",
     Callback = function(Value)
         print(Value)
     end
