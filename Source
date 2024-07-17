@@ -2266,7 +2266,7 @@ function sitinklib:MakeWindow(GuiConfig)
                 function DropdownFunc:Set(Value)
                     DropdownFunc.Value = Value or DropdownFunc.Value
                     for _, Drop in ScrollUnder:GetChildren() do
-                        if Drop.Name ~= "UIListLayout" and not table.find(DropdownFunc.Value, Drop.OptionText.Text) then
+                        if Drop.Name ~= "UIListLayout" and not DropdownFunc.Value == Drop.OptionText.Text then
                             Drop.ChoosingFrame.AnchorPoint = Vector2.new(0, 1)
                             Drop.ChoosingFrame.Position = UDim2.new(0, 5, 1, -5)
                             TweenService:Create(
@@ -2284,7 +2284,7 @@ function sitinklib:MakeWindow(GuiConfig)
                                 TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
                                 {Transparency = 0.999}
                             ):Play()
-                        elseif Drop.Name ~= "UIListLayout" and table.find(DropdownFunc.Value, Drop.OptionText.Text) then
+                        elseif Drop.Name ~= "UIListLayout" and DropdownFunc.Value == Drop.OptionText.Text then
                             Drop.ChoosingFrame.AnchorPoint = Vector2.new(0, 0)
                             Drop.ChoosingFrame.Position = UDim2.new(0, 5, 0, 5)
                             TweenService:Create(
