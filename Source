@@ -2114,27 +2114,25 @@ function sitinklib:MakeWindow(GuiConfig)
             end
             function Items:MakeDropdown(DropdownConfig)
                 local DropdownConfig = DropdownConfig or {}
-                DropdownConfig.Name = DropdownConfig.Name or "Title"
-                DropdownConfig.Multi = DropdownConfig.Multi or false
-                DropdownConfig.Options = DropdownConfig.Options or {}
-                DropdownConfig.Default = DropdownConfig.Default or {}
-                DropdownConfig.DefaultText = DropdownConfig.DefaultText or "Select Options"
-                DropdownConfig.Callback = DropdownConfig.Callback or function()
-                    end
-                local DropdownFunc = {Value = DropdownConfig.Default, Options = DropdownConfig.Options}
-
-                local Dropdown = Instance.new("Frame")
-                local UICorner18 = Instance.new("UICorner")
-                local DropdownTitle = Instance.new("TextLabel")
-                local DropdownButton = Instance.new("TextButton")
-                local DropdownFrame = Instance.new("Frame")
-                local UICorner19 = Instance.new("UICorner")
-                local DropdownBox = Instance.new("TextBox")
-                local DropdownImage = Instance.new("ImageLabel")
-                local DropdownUnder = Instance.new("Frame")
-                local UICorner20 = Instance.new("UICorner")
-                local ScrollUnder = Instance.new("ScrollingFrame")
-                local UIListLayout2 = Instance.new("UIListLayout")
+				DropdownConfig.Name = DropdownConfig.Name or "Title"
+				DropdownConfig.Options = DropdownConfig.Options or {}
+				DropdownConfig.Default = DropdownConfig.Default or {}
+                DropdownConfig.PlaceHolderText = DropdownConfig.PlaceHolderText or "Select Options"
+				DropdownConfig.Callback = DropdownConfig.Callback or function() end
+				local DropdownFunc = {Value = DropdownConfig.Default, Options = DropdownConfig.Options}
+                
+                local Dropdown = Instance.new("Frame");
+                local UICorner18 = Instance.new("UICorner");
+                local DropdownTitle = Instance.new("TextLabel");
+                local DropdownButton = Instance.new("TextButton");
+                local DropdownFrame = Instance.new("Frame");
+                local UICorner19 = Instance.new("UICorner");
+                local DropdownBox = Instance.new("TextBox");
+                local DropdownImage = Instance.new("ImageLabel");
+                local DropdownUnder = Instance.new("Frame");
+                local UICorner20 = Instance.new("UICorner");
+                local ScrollUnder = Instance.new("ScrollingFrame");
+                local UIListLayout2 = Instance.new("UIListLayout");
 
                 Dropdown.BackgroundColor3 = Color3.fromRGB(42.000001296401024, 42.000001296401024, 42.000001296401024)
                 Dropdown.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -2145,11 +2143,9 @@ function sitinklib:MakeWindow(GuiConfig)
                 Dropdown.Name = "Dropdown"
                 Dropdown.Parent = ScrollLayer1
 
-                Dropdown:GetPropertyChangedSignal("Size"):Connect(
-                    function()
-                        UpSize(ScrollLayer1)
-                    end
-                )
+                Dropdown:GetPropertyChangedSignal("Size"):Connect(function()
+                    UpSize(ScrollLayer1)
+                end)
                 UICorner18.CornerRadius = UDim.new(0, 3)
                 UICorner18.Parent = Dropdown
 
@@ -2193,9 +2189,8 @@ function sitinklib:MakeWindow(GuiConfig)
 
                 DropdownBox.CursorPosition = -1
                 DropdownBox.Font = Enum.Font.GothamBold
-                DropdownBox.PlaceholderColor3 =
-                    Color3.fromRGB(120.00000044703484, 120.00000044703484, 120.00000044703484)
-                DropdownBox.PlaceholderText = DropdownConfig.DefaultText
+                DropdownBox.PlaceholderColor3 = Color3.fromRGB(120.00000044703484, 120.00000044703484, 120.00000044703484)
+                DropdownBox.PlaceholderText = DropdownConfig.PlaceHolderText
                 DropdownBox.Text = ""
                 DropdownBox.TextColor3 = Color3.fromRGB(120.00000044703484, 120.00000044703484, 120.00000044703484)
                 DropdownBox.TextSize = 12
@@ -2256,7 +2251,7 @@ function sitinklib:MakeWindow(GuiConfig)
                 function DropdownFunc:Clear()
                     for _, DropFrame in ScrollUnder:GetChildren() do
                         if DropFrame.Name == "Option" then
-                            DropdownFunc.Value = {}
+                            DropdownConfig.Default = {}
                             DropdownFunc.Options = {}
                             DropdownBox.Text = ""
                             DropFrame:Destroy()
@@ -2264,44 +2259,48 @@ function sitinklib:MakeWindow(GuiConfig)
                     end
                 end
                 function DropdownFunc:Set(Value)
-                    DropdownFunc.Value = Value or DropdownFunc.Value
+                    DropdownConfig.Default = Value or DropdownConfig.Default
                     for _, Drop in ScrollUnder:GetChildren() do
-                        if Drop.Name ~= "UIListLayout" and not DropdownFunc.Value == Drop.OptionText.Text then
-                            Drop.ChoosingFrame.AnchorPoint = Vector2.new(0, 1)
-                            Drop.ChoosingFrame.Position = UDim2.new(0, 5, 1, -5)
-                            TweenService:Create(
-                                Drop,
-                                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                                {BackgroundColor3 = Color3.fromRGB(53, 53, 53)}
-                            ):Play()
-                            TweenService:Create(
-                                Drop.ChoosingFrame,
-                                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                                {Size = UDim2.new(0, 2, 0, 0), Transparency = 0.999}
-                            ):Play()
-                            TweenService:Create(
-                                Drop.ChoosingFrame.UIStroke,
-                                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                                {Transparency = 0.999}
-                            ):Play()
-                        elseif Drop.Name ~= "UIListLayout" and DropdownFunc.Value == Drop.OptionText.Text then
-                            Drop.ChoosingFrame.AnchorPoint = Vector2.new(0, 0)
-                            Drop.ChoosingFrame.Position = UDim2.new(0, 5, 0, 5)
-                            TweenService:Create(
-                                Drop,
-                                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                                {BackgroundColor3 = Color3.fromRGB(70, 70, 70)}
-                            ):Play()
-                            TweenService:Create(
-                                Drop.ChoosingFrame,
-                                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                                {Size = UDim2.new(0, 2, 0, 10), Transparency = 0}
-                            ):Play()
-                            TweenService:Create(
-                                Drop.ChoosingFrame.UIStroke,
-                                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                                {Transparency = 0}
-                            ):Play()
+                        if Drop.Name ~= "UIListLayout" then
+                            if Drop.Name == "Option" then
+                                if ((typeof(DropdownConfig.Default) == "table" and not table.find(DropdownConfig.Default, Drop.OptionText.Text)) or typeof(DropdownConfig.Default) == "string" and DropdownConfig.Default ~= Drop.OptionText.Text) then
+                                    Drop.ChoosingFrame.AnchorPoint = Vector2.new(0, 0)
+                                    Drop.ChoosingFrame.Position = UDim2.new(0, 5, 1, -0)
+                                    TweenService:Create(
+                                        Drop,
+                                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                                        {BackgroundColor3 = Color3.fromRGB(53, 53, 53)}
+                                    ):Play()
+                                    TweenService:Create(
+                                        Drop.ChoosingFrame,
+                                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                                        {Size = UDim2.new(0, 2, 0, 0), Transparency = 0.999}
+                                    ):Play()
+                                    TweenService:Create(
+                                        Drop.ChoosingFrame.UIStroke,
+                                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                                        {Transparency = 0.999}
+                                    ):Play()
+                                elseif ((typeof(DropdownConfig.Default) == "table" and table.find(DropdownConfig.Default, Drop.OptionText.Text)) or typeof(DropdownConfig.Default) == "string" and DropdownConfig.Default == Drop.OptionText.Text) then
+                                    Drop.ChoosingFrame.AnchorPoint = Vector2.new(0, 0)
+                                    Drop.ChoosingFrame.Position = UDim2.new(0, 5, 0, 5)
+                                    TweenService:Create(
+                                        Drop,
+                                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                                        {BackgroundColor3 = Color3.fromRGB(70, 70, 70)}
+                                    ):Play()
+                                    TweenService:Create(
+                                        Drop.ChoosingFrame,
+                                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                                        {Size = UDim2.new(0, 2, 0, 20), Transparency = 0}
+                                    ):Play()
+                                    TweenService:Create(
+                                        Drop.ChoosingFrame.UIStroke,
+                                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                                        {Transparency = 0}
+                                    ):Play()
+                                end
+                            end
                         end
                     end
                     if DropdownConfig.Default == "" then
@@ -2314,14 +2313,14 @@ function sitinklib:MakeWindow(GuiConfig)
                 function DropdownFunc:Add(OptionName)
                     local OptionName = OptionName or "Option"
 
-                    local Option1 = Instance.new("Frame")
-                    local UICorner23 = Instance.new("UICorner")
-                    local ChoosingFrame3 = Instance.new("Frame")
-                    local UIStroke3 = Instance.new("UIStroke")
-                    local UICorner24 = Instance.new("UICorner")
-                    local OptionText = Instance.new("TextLabel")
-                    local OptionButton = Instance.new("TextButton")
-
+                    local Option1 = Instance.new("Frame");
+                    local UICorner23 = Instance.new("UICorner");
+                    local ChoosingFrame3 = Instance.new("Frame");
+                    local UIStroke3 = Instance.new("UIStroke");
+                    local UICorner24 = Instance.new("UICorner");
+                    local OptionText = Instance.new("TextLabel");
+                    local OptionButton = Instance.new("TextButton");
+                    
                     Option1.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
                     Option1.BorderColor3 = Color3.fromRGB(0, 0, 0)
                     Option1.BorderSizePixel = 0
@@ -2336,6 +2335,7 @@ function sitinklib:MakeWindow(GuiConfig)
                     ChoosingFrame3.BackgroundColor3 = GuiConfig.Color
                     ChoosingFrame3.BorderColor3 = Color3.fromRGB(0, 0, 0)
                     ChoosingFrame3.BorderSizePixel = 0
+                    ChoosingFrame3.AnchorPoint = Vector2.new(0 ,0)
                     ChoosingFrame3.Position = UDim2.new(0, 5, 0, 5)
                     ChoosingFrame3.Size = UDim2.new(0, 2, 0, 0)
                     ChoosingFrame3.Name = "ChoosingFrame"
@@ -2375,95 +2375,98 @@ function sitinklib:MakeWindow(GuiConfig)
                     OptionButton.Size = UDim2.new(1, 0, 1, 0)
                     OptionButton.Name = "OptionButton"
                     OptionButton.Parent = Option1
-
-                    OptionButton.MouseButton1Click:Connect(
-                        function()
-                            if DropdownConfig.Multi then
-                                if (Option1.BackgroundColor3.R * 255) <= 55 then
-                                    table.insert(DropdownFunc.Value, OptionText.Text)
-                                    DropdownFunc:Set(DropdownFunc.Value)
-                                else
-                                    for i, value in pairs(DropdownFunc.Value) do
-                                        if value == OptionText.Text then
-                                            table.remove(DropdownFunc.Value, i)
-                                            break
-                                        end
+                    
+                    OptionButton.MouseButton1Click:Connect(function()
+                        DropdownConfig.Default = {OptionText.Text}
+                        DropdownBox.Text = OptionText.Text
+                        DropdownConfig.Callback(OptionText.Text)
+                        for i, v in pairs(ScrollUnder:GetChildren()) do
+                            if v.Name == "Option" then
+                                for r, b in pairs(v:GetChildren()) do
+                                    if b.Name == "OptionText" then
+                                        b.TextColor3 = Color3.fromRGB(200, 200, 200)
                                     end
-                                    DropdownFunc:Set(DropdownFunc.Value)
                                 end
-                            else
-                                DropdownFunc.Value = {OptionText.Text}
-                                DropdownFunc:Set(DropdownFunc.Value)
                             end
                         end
-                    )
+                        for i, v in pairs(ScrollUnder:GetChildren()) do
+                            if v.Name == "Option" then
+                                v.BackgroundColor3 = Color3.fromRGB(53, 53, 53)
+                            end
+                        end
+                        for i, v in pairs(ScrollUnder:GetChildren()) do
+                            if v.Name == "Option" then
+                                for r, b in pairs(v:GetChildren()) do
+                                    if b.Name == "ChoosingFrame" then
+                                        TweenService:Create(b,TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(0, -2, 0, 0)}):Play()
+                                    end
+                                end
+                            end
+                        end
+                        DropdownFunc:Set(OptionText.Text)
+                        OptionText.TextColor3 = Color3.new(255, 255, 255)
+                        ChoosingFrame3.Transparency = 0
+                        Option1.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+                        TweenService:Create(ChoosingFrame3,TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(0, 2, 0, 0)}):Play()
+                    end)
                     DropCount = DropCount + 1
                 end
                 function DropdownFunc:Refresh(RefreshList, Selecting)
-                    RefreshList = RefreshList or {}
-                    Selecting = Selecting or {}
-                    DropdownFunc:Clear()
-                    for _, Drop in pairs(RefreshList) do
-                        DropdownFunc:Add(Drop)
-                        wait()
-                    end
-                    DropdownFunc.Options = RefreshList
-                    DropdownFunc:Set(Selecting)
-                end
-                DropdownFunc:Refresh(DropdownFunc.Options, DropdownFunc.Value)
+					RefreshList = RefreshList or {}
+					Selecting = Selecting or {}
+					DropdownFunc:Clear()
+					for _, Drop in pairs(RefreshList) do
+						DropdownFunc:Add(Drop)
+						wait()
+					end
+					DropdownFunc.Options = RefreshList
+					DropdownFunc:Set(Selecting)
+				end
+				DropdownFunc:Refresh(DropdownFunc.Options, DropdownConfig.Default)
                 local StartInput = false
-                DropdownButton.MouseButton1Click:Connect(
-                    function()
-                        if Dropdown.Size.Y.Offset > 44 then
-                            TweenService:Create(
-                                Dropdown,
-                                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                                {Size = UDim2.new(1, -8, 0, 44)}
-                            ):Play()
-                        else
-                            TweenService:Create(
-                                Dropdown,
-                                TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                                {Size = UDim2.new(1, -8, 0, 168)}
-                            ):Play()
-                        end
-                    end
-                )
-                DropdownBox.Focused:Connect(
-                    function()
-                        StartInput = true
+                DropdownButton.MouseButton1Click:Connect(function()
+                    if Dropdown.Size.Y.Offset > 44 then
+                        TweenService:Create(
+                            Dropdown,
+                            TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                            {Size = UDim2.new(1, -8, 0, 44)}
+                        ):Play()
+                    else
                         TweenService:Create(
                             Dropdown,
                             TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
                             {Size = UDim2.new(1, -8, 0, 168)}
                         ):Play()
                     end
-                )
-                DropdownBox.FocusLost:Connect(
-                    function()
-                        StartInput = false
-                    end
-                )
-                DropdownBox:GetPropertyChangedSignal("Text"):Connect(
-                    function()
-                        if DropdownBox.Text == "" then
+                end)
+                DropdownBox.Focused:Connect(function()
+                    StartInput = true
+                    TweenService:Create(
+                        Dropdown,
+                        TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                        {Size = UDim2.new(1, -8, 0, 168)}
+                    ):Play()
+                end)
+                DropdownBox.FocusLost:Connect(function()
+                    StartInput = false
+                end)
+                DropdownBox:GetPropertyChangedSignal("Text"):Connect(function()
+                    if DropdownBox.Text == "" then
+                        for i, v in ScrollUnder:GetChildren() do
+                            if v.Name ~= "UIListLayout" then
+                                v.Visible = true
+                            end
+                        end
+                    else
+                        if StartInput then
                             for i, v in ScrollUnder:GetChildren() do
                                 if v.Name ~= "UIListLayout" then
-                                    v.Visible = true
-                                end
-                            end
-                        else
-                            if StartInput then
-                                for i, v in ScrollUnder:GetChildren() do
-                                    if v.Name ~= "UIListLayout" then
-                                        v.Visible =
-                                            string.find(string.lower(v.OptionText.Text), string.lower(DropdownBox.Text))
-                                    end
+                                    v.Visible = string.find(string.lower(v.OptionText.Text), string.lower(DropdownBox.Text))
                                 end
                             end
                         end
                     end
-                )
+                end)
                 CountItem = CountItem + 1
                 return DropdownFunc
             end
