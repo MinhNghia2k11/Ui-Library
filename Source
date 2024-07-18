@@ -2303,7 +2303,7 @@ function sitinklib:MakeWindow(GuiConfig)
                             end
                         end
                     end
-                    if DropdownConfig.Default == "" then
+                    if DropdownConfig.Default == "" or DropdownConfig.Default == nil then
                         DropdownBox.Text = ""
                     else
                         DropdownBox.Text = tostring(DropdownConfig.Default)
@@ -2377,7 +2377,7 @@ function sitinklib:MakeWindow(GuiConfig)
                     OptionButton.Parent = Option1
                     
                     OptionButton.MouseButton1Click:Connect(function()
-                        DropdownConfig.Default = {OptionText.Text}
+                        DropdownConfig.Default = OptionText.Text
                         DropdownBox.Text = OptionText.Text
                         DropdownConfig.Callback(OptionText.Text)
                         for i, v in pairs(ScrollUnder:GetChildren()) do
