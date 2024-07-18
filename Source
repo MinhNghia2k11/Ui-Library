@@ -2119,7 +2119,7 @@ function sitinklib:MakeWindow(GuiConfig)
 				DropdownConfig.Default = DropdownConfig.Default or ""
                 DropdownConfig.PlaceHolderText = DropdownConfig.PlaceHolderText or "Select Options"
 				DropdownConfig.Callback = DropdownConfig.Callback or function() end
-				local DropdownFunc = {Value = DropdownConfig.Default, Options = DropdownConfig.Options}
+				local DropdownFunc = {}
                 
                 local Dropdown = Instance.new("Frame");
                 local UICorner18 = Instance.new("UICorner");
@@ -2252,7 +2252,7 @@ function sitinklib:MakeWindow(GuiConfig)
                     for _, DropFrame in ScrollUnder:GetChildren() do
                         if DropFrame.Name == "Option" then
                             DropdownConfig.Default = ""
-                            DropdownFunc.Options = {}
+                            DropdownConfig.Options = {}
                             DropdownBox.Text = ""
                             DropFrame:Destroy()
                         end
@@ -2407,16 +2407,16 @@ function sitinklib:MakeWindow(GuiConfig)
                 end
                 function DropdownFunc:Refresh(RefreshList, Selecting)
 					RefreshList = RefreshList or {}
-					Selecting = Selecting or {}
+					Selecting = Selecting or ""
 					DropdownFunc:Clear()
 					for _, Drop in pairs(RefreshList) do
 						DropdownFunc:Add(Drop)
 						wait()
 					end
-					DropdownFunc.Options = RefreshList
+					DropdownConfig.Options = RefreshList
 					DropdownFunc:Set(Selecting)
 				end
-				DropdownFunc:Refresh(DropdownFunc.Options, DropdownConfig.Default)
+				DropdownFunc:Refresh(DropdownConfig.Options, DropdownConfig.Default)
                 local StartInput = false
                 DropdownButton.MouseButton1Click:Connect(function()
                     if Dropdown.Size.Y.Offset > 44 then
@@ -2474,7 +2474,7 @@ function sitinklib:MakeWindow(GuiConfig)
                 if DropdownConfig.Default == "" or DropdownConfig.Default == nil then
                     DropdownBox.Text = ""
                 else
-                    DropdownBox.Text = DropdownConfig.Default
+                    DropdownBox.Text = tostring(DropdownConfig.Default)
                 end
                 DropdownConfig.Callback(DropdownConfig.Default)
                 CountItem = CountItem + 1
