@@ -2116,7 +2116,7 @@ function sitinklib:MakeWindow(GuiConfig)
                 local DropdownConfig = DropdownConfig or {}
 				DropdownConfig.Name = DropdownConfig.Name or "Title"
 				DropdownConfig.Options = DropdownConfig.Options or {}
-				DropdownConfig.Default = DropdownConfig.Default or {}
+				DropdownConfig.Default = DropdownConfig.Default or ""
                 DropdownConfig.PlaceHolderText = DropdownConfig.PlaceHolderText or "Select Options"
 				DropdownConfig.Callback = DropdownConfig.Callback or function() end
 				local DropdownFunc = {Value = DropdownConfig.Default, Options = DropdownConfig.Options}
