@@ -2474,7 +2474,7 @@ function sitinklib:MakeWindow(GuiConfig)
                 if DropdownConfig.Default == "" or DropdownConfig.Default == nil then
                     DropdownBox.Text = ""
                 else
-                    DropdownBox.Text = tostring(DropdownConfig.Default)
+                    DropdownBox.Text = DropdownConfig.Default
                 end
                 DropdownConfig.Callback(DropdownConfig.Default)
                 CountItem = CountItem + 1
