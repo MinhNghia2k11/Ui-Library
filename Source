@@ -206,13 +206,15 @@ UserInputService.InputBegan:Connect(
     end
 )
 local function UpSize(Scroll)
-    local OffsetY = 0
-    for _, child in Scroll:GetChildren() do
-        if child.Name ~= "UIListLayout" then
-            OffsetY = OffsetY + Scroll.UIListLayout.Padding.Offset + child.Size.Y.Offset
+    pcall(function()
+        local OffsetY = 0
+        for _, child in Scroll:GetChildren() do
+            if child.Name ~= "UIListLayout" then
+                OffsetY = OffsetY + Scroll.UIListLayout.Padding.Offset + child.Size.Y.Offset
+            end
         end
-    end
-    Scroll.CanvasSize = UDim2.new(0, 0, 0, OffsetY)
+        Scroll.CanvasSize = UDim2.new(0, 0, 0, OffsetY)
+    end)
 end
 local function AutoUp(Scroll)
     Scroll.ChildAdded:Connect(
