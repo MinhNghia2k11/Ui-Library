@@ -524,6 +524,12 @@ function sitinklib:MakeWindow(GuiConfig)
     local CloseImage = Instance.new("ImageLabel")
     local DropShadowHolder = Instance.new("Frame")
     local DropShadow = Instance.new("ImageLabel")
+    local shit = Instance.new("Frame")
+    local UICorner1 = Instance.new("UICorner")
+    local ImageLabel = Instance.new("ImageLabel")
+    local UICorner_2 = Instance.new("UICorner")
+    local Click23 = Instance.new("TextButton")
+    local uiconcac = Instance.new("UICorner")
 
     SitinkGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     SitinkGui.Name = "SitinkGui"
@@ -537,6 +543,7 @@ function sitinklib:MakeWindow(GuiConfig)
     Main.Size = UDim2.new(0, 500, 0, 300)
     Main.Name = "Main"
     Main.Parent = SitinkGui
+    Main.Visible = false
     Main.Position =
         UDim2.new(
         0,
@@ -544,6 +551,58 @@ function sitinklib:MakeWindow(GuiConfig)
         0,
         (SitinkGui.AbsoluteSize.Y // 2 - Main.Size.Y.Offset // 2)
     )
+
+    sitinklib:MakeNotify({
+        Title = "UI Library",
+        Description = "Interface",
+        Content = "Auto Visible UI, click the Icon to Show Interface",
+        Time = 7
+    })
+
+    shit.Name = "shit"
+    shit.Parent = SitinkGui
+    shit.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    shit.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    shit.BorderSizePixel = 0
+    shit.ClipsDescendants = true
+    shit.Position = UDim2.new(0.954463005, 0, 0.894736826, 0)
+    shit.Size = UDim2.new(0, 45, 0, 45)
+
+    UICorner1.CornerRadius = UDim.new(1, 0)
+    UICorner1.Parent = shit
+
+    ImageLabel.Parent = shit
+    ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    ImageLabel.BackgroundTransparency = 1.000
+    ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    ImageLabel.BorderSizePixel = 0
+    ImageLabel.Size = UDim2.new(1, 0, 1, 0)
+    ImageLabel.Image = "http://www.roblox.com/asset/?id=18678109959"
+
+    UICorner_2.CornerRadius = UDim.new(1, 0)
+    UICorner_2.Parent = ImageLabel
+
+    Click23.Name = "Click"
+    Click23.Parent = shit
+    Click23.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Click23.BackgroundTransparency = 1.000
+    Click23.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    Click23.BorderSizePixel = 0
+    Click23.Size = UDim2.new(1, 0, 1, 0)
+    Click23.Font = Enum.Font.SourceSans
+    Click23.Text = ""
+    Click23.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Click23.TextSize = 14.000
+    Click23.MouseButton1Click:Connect(function()
+        if Main.Visible == false then
+            Main.Visible = true
+        else
+            Main.Visible = false
+        end
+    end)
+
+    uiconcac.CornerRadius = UDim.new(1, 0)
+    uiconcac.Parent = Click23
 
     UICorner.CornerRadius = UDim.new(0, 5)
     UICorner.Parent = Main
